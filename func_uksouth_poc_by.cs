@@ -26,9 +26,7 @@ public class func_uksouth_poc_by
         _logger.LogInformation("Message ID: {id}", message.MessageId);
         _logger.LogInformation("Message Body: {body}", message.Body);
         _logger.LogInformation("Message Content-Type: {contentType}", message.ContentType);
-
-        // creates an HTTP GET call with URL parameters fetched from payload - calls API 2 HTTP GET method using subscription key
-
+        
         // Parse JSON payload to extract parameters
         var body = message.Body.ToString();
         var payload = JsonSerializer.Deserialize<Dictionary<string, string>>(body) ?? [];
