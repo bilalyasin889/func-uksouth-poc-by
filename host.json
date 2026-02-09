@@ -2,13 +2,12 @@
   "version": "2.0",
   "logging": {
     "logLevel": {
-      "Function.MyFunction": "Information",
-      "default": "None"
+      "default": "Information",
+      "Function": "Information"
     },
     "applicationInsights": {
       "samplingSettings": {
-        "isEnabled": true,
-        "excludedTypes": "Request"
+        "isEnabled": true
       },
       "enableLiveMetricsFilters": true
     }
