@@ -3,10 +3,8 @@
   "logging": {
     "logLevel": {
       "default": "Information",
-      "Function": "Warning",
-      "Host.Results": "Error",
-      "Function.func_uksouth_poc_by": "Information",
-      "Function.func_uksouth_poc_by.User": "Information"
+      "Function": "Information",
+      "Host.Results": "Error"
     },
     "applicationInsights": {
       "samplingSettings": {
