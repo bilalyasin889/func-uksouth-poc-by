@@ -49,6 +49,7 @@ public class func_uksouth_poc_by
         using var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
 
+        _logger.LogInformation("Making API request to: {requestUrl}", requestUrl);
         var response = await httpClient.GetAsync(requestUrl);
         response.EnsureSuccessStatusCode();
         var responseBody = await response.Content.ReadAsStringAsync();
