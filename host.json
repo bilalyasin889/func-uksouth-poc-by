@@ -2,9 +2,7 @@
   "version": "2.0",
   "logging": {
     "logLevel": {
-      "default": "Warning",
-      "Function.func_uksouth_poc_by.User": "Information",
-      "Microsoft.Azure.Functions.Worker": "Information"
+      "default": "Information"
     },
     "applicationInsights": {
       "samplingSettings": {
