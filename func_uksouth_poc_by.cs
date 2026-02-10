@@ -9,6 +9,12 @@ namespace func_uksouth_poc_by;
 
 public class func_uksouth_poc_by
 {
+    private readonly ILogger<func_uksouth_poc_by> _logger;
+
+    public func_uksouth_poc_by(ILogger<func_uksouth_poc_by> logger)
+    {
+        _logger = logger;
+    }
 
     [Function(nameof(func_uksouth_poc_by))]
     [ServiceBusOutput("sbq-uksouth-poc-by-outbound", Connection = "sbuklabs_SERVICEBUS")]
@@ -16,11 +22,12 @@ public class func_uksouth_poc_by
         [ServiceBusTrigger("sbq-uksouth-poc-by-inbound", Connection = "sbuklabs_SERVICEBUS")]
         ServiceBusReceivedMessage message,
         ServiceBusMessageActions messageActions,
-        ILogger logger)
+        ILogger logger
+        )
     {
-        logger.LogInformation("Message ID: {id}", message.MessageId);
-        logger.LogInformation("Message Body: {body}", message.Body);
-        logger.LogInformation("Message Content-Type: {contentType}", message.ContentType);
+        _logger.LogInformation("Message ID: {id}", message.MessageId);
+        _logger.LogInformation("Message Body: {body}", message.Body);
+        _logger.LogInformation("Message Content-Type: {contentType}", message.ContentType);
         
         // Parse JSON payload to extract parameters
         var body = message.Body.ToString();
@@ -35,7 +42,7 @@ public class func_uksouth_poc_by
         // Construct the full URL
         var baseUrl = Environment.GetEnvironmentVariable("ApiM_Backend_Url");
         var requestUrl = $"{baseUrl}?{query}";
-        logger.LogInformation("Request URL: {requestUrl}", requestUrl);
+        _logger.LogInformation("Request URL: {requestUrl}", requestUrl);
 
         // Get subscription key from environment variable
         var subscriptionKey = Environment.GetEnvironmentVariable("Ocp-Apim-Subscription-Key");
@@ -44,12 +51,12 @@ public class func_uksouth_poc_by
         using var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
 
-        logger.LogInformation("Making API request to: {requestUrl}", requestUrl);
+        _logger.LogInformation("Making API request to: {requestUrl}", requestUrl);
         var response = await httpClient.GetAsync(requestUrl);
         response.EnsureSuccessStatusCode();
         var responseBody = await response.Content.ReadAsStringAsync();
         
-        logger.LogInformation("API Response: {responseBody}", responseBody);
+        _logger.LogInformation("API Response: {responseBody}", responseBody);
 
         // Complete the message
         await messageActions.CompleteMessageAsync(message);
