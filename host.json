@@ -2,7 +2,10 @@
   "version": "2.0",
   "logging": {
     "logLevel": {
-      "default": "Warning"
+      "default": "Warning",
+      "Host.Aggregator": "Trace",
+      "Host.Results": "Information",
+      "Function": "Information"
     },
     "applicationInsights": {
       "samplingSettings": {
