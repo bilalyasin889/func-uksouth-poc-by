@@ -21,9 +21,7 @@ public class func_uksouth_poc_by
     public async Task<string> Run(
         [ServiceBusTrigger("sbq-uksouth-poc-by-inbound", Connection = "sbuklabs_SERVICEBUS")]
         ServiceBusReceivedMessage message,
-        ServiceBusMessageActions messageActions,
-        ILogger logger
-        )
+        ServiceBusMessageActions messageActions)
     {
         _logger.LogInformation("Message ID: {id}", message.MessageId);
         _logger.LogInformation("Message Body: {body}", message.Body);
